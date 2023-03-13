@@ -1,10 +1,12 @@
 package com.example.agent.controller;
 
 import com.example.agent.dto.UserDTO;
-import com.example.agent.entity.User;
+import com.example.agent.repo.UserRepo;
 import com.example.agent.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -20,14 +22,6 @@ private UserService userService;
       return userService.getAllUsers();
     }
 
-//    @GetMapping("/{id}")
-//    public User getUserById(@PathVariable Long id) {
-//        return userRepository.findById(id).orElse(null);
-//    }
-//    @GetMapping("/{id}")
-//    public List<UserDTO> id(){
-//        return userService.getAllUsers();
-//    }
 
     @PostMapping("/saveUser")
     public UserDTO saveUser(@RequestBody UserDTO userDTO) {
@@ -43,8 +37,13 @@ private UserService userService;
     }
 
 
-//    @GetMapping("/getUserByUserId{userID}")
-//    public UserDTO getUserByUserID(@PathVariable String userID){
-//        return userService.getUserByUserID(userID);
-//    }
+//    Get a Specific user by passing the ID
+@Autowired
+private UserRepo userrepo;
+    @GetMapping("/SpecificUser/{id}")
+    public UserDTO getUserById(@PathVariable Long id) {
+        return userrepo.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Book not found"));
+    }
 }
+

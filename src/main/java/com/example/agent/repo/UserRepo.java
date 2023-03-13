@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 public interface UserRepo extends JpaRepository<UserDTO,Long> {
 
    //Writing Native Query
- //    @Query(value = "SELECT * FROM agent WHERE ID=?1")
+ //    @Query(value = "SELEC T * FROM agent WHERE ID=?1")
  //    User getUserByUserID(String userId);
 
 }
