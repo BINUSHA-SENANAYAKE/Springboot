@@ -43,7 +43,7 @@ private UserRepo userrepo;
     @GetMapping("/SpecificUser/{id}")
     public UserDTO getUserById(@PathVariable Long id) {
         return userrepo.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Book not found"));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
     }
 }
 
